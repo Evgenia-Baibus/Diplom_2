@@ -156,6 +156,7 @@ class User:
            result["response_json"] = response.json()
         except:
             pass
+        return  result
 
     @staticmethod
     def get_orders_for_user(access_token):
