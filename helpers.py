@@ -1,4 +1,4 @@
-import fake
+
 import requests
 from faker import Faker
 from urls import Urls
@@ -131,5 +131,37 @@ class User:
         response = requests.patch(Urls.UPDATE_DATA_USER, data = updated_data, headers = headers)
         return {"response_json": response.json(), "status_code": response.status_code}
 
+
+    @staticmethod
+    def get_ingredients(access_token):
+        headers = {"Authorization": access_token}
+
+        response = requests.get(Urls.INGREDIENTS, headers = headers)
+        ingredients = []
+        for ingredient in response.json()['data']:
+            ingredients.append(ingredient['_id'])
+        return ingredients
+
+    @staticmethod
+    def create_order(access_token, ingredients):
+        headers = {"Authorization": access_token}
+
+        data = {
+            "ingredients": ingredients
+        }
+
+        response = requests.post(Urls.ORDER, headers = headers, data = data)
+        result = { "status_code": response.status_code }
+        try:
+           result["response_json"] = response.json()
+        except:
+            pass
+
+    @staticmethod
+    def get_orders_for_user(access_token):
+        headers = {"Authorization": access_token}
+
+        response = requests.get(Urls.ORDER, headers=headers)
+        return {"response_json": response.json(), "status_code": response.status_code}
 
 
