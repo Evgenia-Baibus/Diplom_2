@@ -150,7 +150,7 @@ class User:
             "ingredients": ingredients
         }
 
-        response = requests.post(Urls.ORDER, headers = headers, data = data)
+        response = requests.post(Urls.CREATE_ORDER, headers = headers, data = data)
         result = { "status_code": response.status_code }
         try:
            result["response_json"] = response.json()
@@ -161,7 +161,7 @@ class User:
     def get_orders_for_user(access_token):
         headers = {"Authorization": access_token}
 
-        response = requests.get(Urls.ORDER, headers=headers)
+        response = requests.get(Urls.CREATE_ORDER, headers=headers)
         return {"response_json": response.json(), "status_code": response.status_code}
 
 
