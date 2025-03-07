@@ -1,16 +1,24 @@
+import allure
+
 from helpers import User
 
 
 class TestCreateOrder:
 
+    @allure.title('Проверка создания заказа без авторизации юзера')
+    @allure.description('Отправляем запрос и проверяем, что создается заказ для неавторизованного пользователя')
     def test_create_order_for_user(self, unauthorized_user):
 
         assert self.__create_order(unauthorized_user)
 
+    @allure.title('Проверка создания заказа с авторизацией юзера')
+    @allure.description('Отправляем запрос и проверяем, что создается заказ для авторизованного пользователя')
     def test_create_order_for_authorized_user(self, authorized_user):
 
         assert self.__create_order(authorized_user)
 
+    @allure.title('Проверка создания заказа с ингредиентами')
+    @allure.description('Отправляем запрос и проверяем, что создается заказ с ингредиентами')
     def test_create_order_with_ingredients(self, authorized_user):
 
         ingredients = User.get_ingredients(authorized_user['response_json']['accessToken'])
@@ -22,6 +30,8 @@ class TestCreateOrder:
 
         assert response["status_code"] == 200 and ingredients[0:4] == ingredients_response
 
+    @allure.title('Проверка создания заказа без ингредиентов')
+    @allure.description('Отправляем запрос и проверяем, что возвращается ошибка')
     def test_create_order_without_ingredients(self, authorized_user):
         response = User.create_order(authorized_user['response_json']['accessToken'], [''])
 
@@ -31,6 +41,8 @@ class TestCreateOrder:
         }
         assert response["status_code"] == 400 and response["response_json"] == expected_json
 
+    @allure.title('Проверка создания заказа с неверным хешем ингредиентов')
+    @allure.description('Отправляем запрос и проверяем, что возвращается ошибка')
     def test_create_order_with_incorrect_ingredient(self, authorized_user):
         response = User.create_order(authorized_user['response_json']['accessToken'], ['hghb'])
 
