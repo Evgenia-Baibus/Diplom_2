@@ -13,8 +13,6 @@ class UserDataGeneration:
         password = fake.password()
         name = fake.name()
 
-
-
         return {
             "email": email,
             "password": password,
@@ -75,7 +73,6 @@ class UserDataGeneration:
         }
 
 class UserData:
-    fake = Faker()
 
     data_with_incorrect_email = {
         "email": '111xxg',
