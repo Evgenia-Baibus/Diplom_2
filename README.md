@@ -21,9 +21,19 @@
 * [conftest.py](tests/conftest.py) - файл с фикстурами
 * [helpers.py](helpers.py) - файл с вспомогательными методами и классами
 
-## Запуск тестов
+## Запуск автотестов
+
+**Установка зависимостей**
+```bash
+pip install -r requirements.txt
+```
 
 Для запуска тестов выполнить:
 ```bash
-pytest
+pytest tests --alluredir=allure_results
+```
+
+Для генерации репорта выполнить:
+```bash
+allure generate --single-file allure_results -o allure_report
 ```
