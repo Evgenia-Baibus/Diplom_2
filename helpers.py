@@ -165,4 +165,3 @@ class User:
         response = requests.get(Urls.CREATE_ORDER, headers=headers)
         return {"response_json": response.json(), "status_code": response.status_code}
 
-

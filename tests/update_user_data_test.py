@@ -1,5 +1,5 @@
 import pytest
-from data import UpdateUserData
+from data import UpdateUserData, ExpectedResponses
 from helpers import User, UserData
 from tests.conftest import unauthorized_user
 
@@ -26,31 +26,21 @@ class TestUpdatingUserData:
             user_data["name"]
         )
 
-        expected_json = {
-            "success": False,
-            "message": "You should be authorised"
-        }
-
-        assert response["status_code"] == 401 and response["response_json"] == expected_json
+        assert response["status_code"] == 401 and response["response_json"] == ExpectedResponses.unauthorized
 
     @staticmethod
     def __update_user_data(user, update_data):
         user_data = user["data"]
         user_data.update(update_data)
+        email = user_data["email"]
+        name = user_data["name"]
+
 
         response = User.update_user_data(
             user['response_json']['accessToken'],
-            user_data["email"],
+            email,
             user_data["password"],
-            user_data["name"]
+            name
         )
 
-        expected_json = {
-            "success": True,
-            "user": {
-                "email": user_data["email"],
-                "name": user_data["name"]
-            }
-        }
-
-        return response["status_code"] == 200 and response["response_json"] == expected_json
+        return response["status_code"] == 200 and response["response_json"] == ExpectedResponses.success_update(email, name)
