@@ -10,11 +10,11 @@
 ## Структура проекта 
 
 * [tests](tests) - директория с тестами
-* [tests](tests/create_order_test.py) - файл с проверками списка заказов юзера
-* [tests](tests/get_user_orders_test.py) - файл с проверками совершения заказа
-* [test](tests/sign_in_user_test.py) - файл с проверками логина юзера
-* [test](tests/sign_up_user_test.py) - файл с проверками регистрации юзера
-* [test](tests/update_user_data_test.py) - файо с проверками обновления данных юзера
+* [tests](tests/test_create_order.py) - файл с проверками списка заказов юзера
+* [tests](tests/test_get_user_orders.py) - файл с проверками совершения заказа
+* [test](tests/test_sign_in_user.py) - файл с проверками логина юзера
+* [test](tests/test_sign_up_user.py) - файл с проверками регистрации юзера
+* [test](tests/test_update_user_data.py) - файо с проверками обновления данных юзера
 * [data.py](data.py) - файл с данными юзера
 * [urls.py](urls.py) - файл с эндроинтами
 * [allure_results](allure_results) - каталог с отчетом тестирования

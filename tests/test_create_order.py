@@ -29,14 +29,16 @@ class TestCreateOrder:
         for ingredient in response['response_json']['order']['ingredients']:
             ingredients_response.append(ingredient['_id'])
 
-        assert response["status_code"] == 200 and ingredients == ingredients_response
+        assert response["status_code"] == 200
+        assert ingredients == ingredients_response
 
     @allure.title('Проверка создания заказа без ингредиентов')
     @allure.description('Отправляем запрос и проверяем, что возвращается ошибка')
     def test_create_order_without_ingredients(self, authorized_user):
         response = User.create_order(authorized_user['response_json']['accessToken'], [''])
 
-        assert response["status_code"] == 400 and response["response_json"] == ExpectedResponses.ingredient_must_be_provided
+        assert response["status_code"] == 400
+        assert response["response_json"] == ExpectedResponses.ingredient_must_be_provided
 
     @allure.title('Проверка создания заказа с неверным хешем ингредиентов')
     @allure.description('Отправляем запрос и проверяем, что возвращается ошибка')

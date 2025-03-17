@@ -26,7 +26,8 @@ class TestUpdatingUserData:
             user_data["name"]
         )
 
-        assert response["status_code"] == 401 and response["response_json"] == ExpectedResponses.unauthorized
+        assert response["status_code"] == 401
+        assert response["response_json"] == ExpectedResponses.unauthorized
 
     @staticmethod
     def __update_user_data(user, update_data):
